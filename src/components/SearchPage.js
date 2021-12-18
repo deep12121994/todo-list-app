@@ -2,20 +2,28 @@ import React,{useState} from 'react';
 import WareHouseList from '../warehouse.json'
 import WareHouse from './WareHouseList';
 
+
 const SearchPage = () => {
     const[searchWareHouse,setSearchWareHouse] = useState("");
     const [wareHouse,setWareHouse] = useState([]);
-    const [alert, setAlert] = useState("");
+
 
     const getWarehouseDetails = async () => {
-        // if (!result.data.more) {
-        //     setWareHouse([]);
-        //     return setAlert("No Warehouse found with such name");
-            
-        // }
+        const lowercasedFilter = searchWareHouse.toLowerCase();
+        const filteredData = WareHouseList.filter(item => {
+        return Object.keys(item).some(key =>
+            typeof item[key] === "string" && item[key].toLowerCase().includes(lowercasedFilter)
+         );
+        });
+        console.log("fitered: ", filteredData)
+        if (filteredData.length === 0) {
+            setWareHouse([]);
+            alert("No Warehouse found with such name");
+            return;
+        }
         // console.log(result)
-        setSearchWareHouse(WareHouseList);
-        // setAlert("");
+        setSearchWareHouse(filteredData);
+        
 
     }; 
 
