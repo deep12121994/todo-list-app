@@ -1,17 +1,15 @@
 import React from 'react';
 
 const WareHouse = ({wareHouseList}) =>{
-    const {name, city, type, cluster, code, space_available, is_live, is_registered} = wareHouseList;
+    const {name, city, type, cluster, code, space_available} = wareHouseList;
     return(
         <div className='warehouse-card'>
-            <h3>{name}</h3>
-            <h5>{city}</h5>
-            <h5>{type}</h5>
-            <h5>{cluster}</h5>
-            <h5>{code}</h5>
-            <h5>{space_available}</h5>
-            <h5>{is_live}</h5>
-            <h5>{is_registered}</h5>
+           <h3>Name: {name}</h3>
+            <h5>City: {city}</h5>
+            <h5>Type: {type}</h5>
+            <h5>Cluster: {cluster}</h5>
+            <h5>Code: {code}</h5>
+            <h5>Space_available: {space_available}</h5>
         </div>
     )
 }

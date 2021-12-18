@@ -6,6 +6,7 @@ import WareHouse from './WareHouseList';
 const SearchPage = () => {
     const[searchWareHouse,setSearchWareHouse] = useState("");
     const [wareHouse,setWareHouse] = useState([]);
+    const [filterValue, setFilterValue] =  useState("name");
 
 
     const getWarehouseDetails = async () => {
@@ -22,7 +23,7 @@ const SearchPage = () => {
             return;
         }
         // console.log(result)
-        setSearchWareHouse(filteredData);
+        setWareHouse(filteredData);
         
 
     }; 
@@ -43,14 +44,29 @@ const SearchPage = () => {
                 onChange = {e => setSearchWareHouse(e.target.value)}
                 />
                 <button id="btn-search">Search</button>
+                <select className='filter-options'>
+                    <option onClick={() => setFilterValue("name")}>name</option>
+                    <option onClick={() => setFilterValue("city")}>city</option>
+                    <option onClick={() => setFilterValue("cluster")}>cluster</option>
+                    <option onClick={() => setFilterValue("Space_available")}>Space_available</option>
+                </select>
             </form>
-            <div className="warehouse-container">
-                {WareHouseList !== [] &&
-                    WareHouseList.map(val => {
-                        
-                        return <WareHouse className='' key={val.id} wareHouseList={val}/>
-                    })
-                }
+            <div>
+            {wareHouse.length === 0 ? 
+                <div className="warehouse-container">
+                    {WareHouseList !== [] &&
+                            WareHouseList.map(val => {     
+                                return <WareHouse className='' key={val.id} wareHouseList={val}/>
+                            })
+                    }
+                </div>:
+                <div className="warehouse-container">
+                    {wareHouse.map(val => {
+                            return <WareHouse className='' key={val.id} wareHouseList={val}/>
+                        })
+                    } 
+                </div>
+            } 
             </div>
         </div>
     )
