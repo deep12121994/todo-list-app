@@ -124,8 +124,8 @@ input {
 
 #btn-item:hover {
   display: inline-block;
-  height: 53px;
-  width: 150px;
+  height: 20px;
+  width: 100px;
   border: 2px solid black;
   border-radius: 4px;
   background-color: white;
@@ -133,7 +133,7 @@ input {
   font-size: medium;
   font-weight: bold;
   cursor: pointer;
-  padding: 5px 20px;
+  padding: 18px;
 }
 
 .warehouse-container {
