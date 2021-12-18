@@ -1,6 +1,8 @@
 import React from 'react';
+import SearchPage from './components/SearchPage';
+import DetailsPage from './components/DetailsPage';
 import './App.css';
-import ListTodo from './ListTodo';
+
 
 class App extends React.Component {
   constructor(props){
@@ -53,18 +55,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h1>Todo List</h1>
-        <header>
-          <form id="todo-form" onSubmit={this.addTodo}>
-            <input type="text" 
-              placeholder="Enter Todo here"
-              value={this.state.currentTodo.text}
-              onChange={this.handleInput}
-            />
-            <button type="submit">Add Todo</button>
-          </form>
-        </header>
-        <ListTodo todo={this.state.todo} deleteTodo={this.deleteTodo}></ListTodo>
+        <header>Warehouse Information</header>
+        <SearchPage/>
+        <DetailsPage/>
       </div>
     );
   }
