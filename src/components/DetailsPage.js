@@ -21,20 +21,12 @@ const DetailsPage = () => {
         },
       onSubmit: values => {
         alert(JSON.stringify(values, null, 2));
-        //WareHouseList.push(JSON.stringify(values))
-        let newRaw = JSON.stringify(values);
-        fs.writeFileSync("../database/items.json", newRaw);
-        // const fileData = JSON.stringify(values);
-        // const blob = new Blob([fileData], {type: "text/plain"});
-        // const url = URL.createObjectURL(blob);
-        // const link = document.createElement('a');
-        // link.download = `${filename}.json`;
-        // link.href = url;
-        // link.click();
-        //let data = JSON.stringify(values, null, 2)
-        // jsonfile.writeFile('../warehouse.json', JSON.stringify(values), function (err) {
-        //     console.error(err);
-        // });
+        const fileData = JSON.stringify(values);
+        const blob = new Blob([fileData], {type: "text/plain"});
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = `${filename}.json`;
+        link.href = url;
       }});
 
 
