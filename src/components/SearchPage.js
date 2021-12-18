@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import { Link } from 'react-router-dom';
 import WareHouseList from '../warehouse.json'
 import WareHouse from './WareHouseList';
 
@@ -18,21 +19,14 @@ const SearchPage = () => {
         const filteredData = WareHouseList.filter(item => { 
             if(filterValue !== "space_available")
                 return item[value].toLowerCase() === lowercasedFilter
-            else return item[value] === lowercasedFilter    
-
-        // return Object.keys(item).some(key =>
-        //     typeof item[key] === "string" && item[key].toLowerCase().includes(lowercasedFilter)
-        //  );
+            else return item[value] === lowercasedFilter  
         });
         if (filteredData.length === 0) {
             setWareHouse([]);
             alert("No Warehouse found with such name");
             return;
         }
-        // console.log(result)
         setWareHouse(filteredData);
-        
-
     }; 
 
 
@@ -58,7 +52,9 @@ const SearchPage = () => {
                     <option value="cluster">cluster</option>
                     <option value="space_available">space_available</option>
                 </select>
+                <Link id="btn-item" to="/details">Add Item</Link>
             </form>
+            
             <div>
             {wareHouse.length === 0 ? 
                 <div className="warehouse-container">
