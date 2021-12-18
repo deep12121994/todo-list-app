@@ -6,17 +6,24 @@ import WareHouse from './WareHouseList';
 const SearchPage = () => {
     const[searchWareHouse,setSearchWareHouse] = useState("");
     const [wareHouse,setWareHouse] = useState([]);
-    const [filterValue, setFilterValue] =  useState("name");
+    const [filterValue, setFilterValue] =  useState("");
 
 
     const getWarehouseDetails = async () => {
-        const lowercasedFilter = searchWareHouse.toLowerCase();
-        const filteredData = WareHouseList.filter(item => {
-        return Object.keys(item).some(key =>
-            typeof item[key] === "string" && item[key].toLowerCase().includes(lowercasedFilter)
-         );
+        
+        console.log("filter value", filterValue, " ", searchWareHouse)
+        let value = filterValue;
+        const lowercasedFilter = filterValue === "space_available" ? 
+                            parseInt(searchWareHouse) : searchWareHouse.toLowerCase();
+        const filteredData = WareHouseList.filter(item => { 
+            if(filterValue !== "space_available")
+                return item[value].toLowerCase() === lowercasedFilter
+            else return item[value] === lowercasedFilter    
+
+        // return Object.keys(item).some(key =>
+        //     typeof item[key] === "string" && item[key].toLowerCase().includes(lowercasedFilter)
+        //  );
         });
-        console.log("fitered: ", filteredData)
         if (filteredData.length === 0) {
             setWareHouse([]);
             alert("No Warehouse found with such name");
@@ -27,6 +34,7 @@ const SearchPage = () => {
         
 
     }; 
+
 
     const onSubmitData = (e) => {
         e.preventDefault();
@@ -40,15 +48,15 @@ const SearchPage = () => {
                 className="search-bar" 
                 placeholder="Search Warehouse...."
                 autoComplete="off"
-                val={wareHouse}
+                val={searchWareHouse}
                 onChange = {e => setSearchWareHouse(e.target.value)}
                 />
                 <button id="btn-search">Search</button>
-                <select className='filter-options'>
-                    <option onClick={() => setFilterValue("name")}>name</option>
-                    <option onClick={() => setFilterValue("city")}>city</option>
-                    <option onClick={() => setFilterValue("cluster")}>cluster</option>
-                    <option onClick={() => setFilterValue("Space_available")}>Space_available</option>
+                <select className='filter-options' value={filterValue} onChange={(e) => setFilterValue(e.target.value)}> 
+                    <option value="name">name</option>
+                    <option value="city">city</option>
+                    <option value="cluster">cluster</option>
+                    <option value="space_available">space_available</option>
                 </select>
             </form>
             <div>
